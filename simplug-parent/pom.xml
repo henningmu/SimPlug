@@ -5,9 +5,10 @@
 	<artifactId>simplug-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	<name>SimPlug Plugin Framework Parent</name>
 
 	<modules>
-		<module>simplug-core</module>
-		<module>simplug-model</module>
+		<module>../simplug-core</module>
+		<module>../simplug-model</module>
 	</modules>
 </project>
