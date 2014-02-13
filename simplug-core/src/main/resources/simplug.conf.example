@@ -1,0 +1,18 @@
+########################################################
+# This is a template file all possible configuration   #
+# properties and their values.                         #
+# Concern this file first when writing configurations. #
+# If you have access to the code check interface       #
+# org.simplug.framework.core.config.Configuration for  #
+# a list off all available properties.                 #
+########################################################
+
+# Defines the directory where SimPlug should look for plugins
+# it is relative to root of the final jar
+org.simplug.framework.core.plugindir = "plugins/"
+
+# Name of the configuration file inside the plugins
+# Better not change this name unless all plugins are going to
+# change their configuration file name otherwise SimPlug
+# will not load all of your plugins
+org.simplug.framework.core.pluginconf.name = "plugin.conf"

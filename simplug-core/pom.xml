@@ -11,4 +11,18 @@
 	
 	<artifactId>simplug-core</artifactId>
 	<name>SimPlug Plugin Framework Core</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.simplug.framework</groupId>
+			<artifactId>simplug-model</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>1.9</version>
+		</dependency>
+	</dependencies>
 </project>
