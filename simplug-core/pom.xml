@@ -17,7 +17,7 @@
 			<groupId>org.simplug.framework</groupId>
 			<artifactId>simplug-model</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>compile</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>commons-configuration</groupId>
