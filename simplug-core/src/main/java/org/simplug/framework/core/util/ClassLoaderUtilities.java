@@ -24,8 +24,8 @@ public class ClassLoaderUtilities {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(ClassLoaderUtilities.class);
 
-	public static LinkedHashMap<String, List<Class<?>>> getEventListeners(
-			File[] pluginJarFiles) {
+	public static LinkedHashMap<String, List<Class<?>>> getEventListeners(File[] pluginJarFiles) {
+		
 		LinkedHashMap<String, List<Class<?>>> eventListeners = new LinkedHashMap<String, List<Class<?>>>();
 		URLClassLoader classLoader = new URLClassLoader(
 				JarUtilities.convertFilesToUrls(pluginJarFiles));
@@ -41,12 +41,8 @@ public class ClassLoaderUtilities {
 				// Search for config
 				ZipEntry entry;
 				while ((entry = jarInputStream.getNextEntry()) != null) {
-					boolean isPluginConf = entry
-							.getName()
-							.toLowerCase()
-							.endsWith(
-									configurationManager
-											.getProperty(Configuration.CONF_PLUGIN_CONFIG_NAME));
+					boolean isPluginConf = entry.getName().toLowerCase()
+							.endsWith(configurationManager.getProperty(Configuration.CONF_PLUGIN_CONFIG_NAME));
 					if (isPluginConf) {
 						ZipFile jarFile = new ZipFile(pluginJar);
 						InputStream configInputStream = jarFile
@@ -54,7 +50,6 @@ public class ClassLoaderUtilities {
 						Properties configProperties = new Properties();
 						configProperties.load(configInputStream);
 						configInputStream.close();
-
 						eventListeners = addEventListeners(configProperties,
 								classLoader, eventListeners);
 						break;
@@ -73,7 +68,7 @@ public class ClassLoaderUtilities {
 				return null;
 			}
 		}
-
+		
 		return eventListeners;
 	}
 
@@ -86,6 +81,11 @@ public class ClassLoaderUtilities {
 					.get(keyEvent);
 			Class<?> listeningClass = null;
 			String className = pluginConfiguration.getProperty(keyEvent);
+			if (isPluginClass(className, classLoader) == false) {
+				LOG.info("Class " + className
+						+ " is not a valid plugin. It is registered to listen for event " + keyEvent
+						+ " but does not extend the Plugin class provided in simplug-model.");
+			}
 			try {
 				listeningClass = classLoader.loadClass(className);
 			} catch (ClassNotFoundException e) {
@@ -102,5 +102,22 @@ public class ClassLoaderUtilities {
 		}
 
 		return currentEventListeners;
+	}
+
+	private static boolean isPluginClass(String className,
+			URLClassLoader classLoader) {
+//		try {
+//			Class<?> clazz = classLoader.loadClass(className);
+//			if (clazz.getSuperclass().equals(Plugin.class)) {
+//				return true;
+//			}
+//		} catch (ClassNotFoundException e) {
+//			LOG.warn("ClassNotFoundException while trying to determine whether class is a plugin or not. "
+//					+ "Faulty class name: " + className);
+//			return false;
+//		}
+//
+//		return false;
+		return true;
 	}
 }

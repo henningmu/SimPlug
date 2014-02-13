@@ -25,6 +25,10 @@ public class SimPlug {
 		classifyPlugins();
 	}
 	
+	public void fireEvent(String event, Object data) {
+		pluginManager.delegateEvent(event, data);
+	}
+	
 	// only for testing
 	public void logLoadedPlugins() {
 		pluginManager.logPlugins();
