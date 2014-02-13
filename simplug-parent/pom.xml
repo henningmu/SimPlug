@@ -13,7 +13,8 @@
 		<module>../simplug-model</module>
 		<module>../sample/plugin-alpha</module>
 		<module>../sample/plugin-beta</module>
-		<module>../sample/sample-framework</module>
+		<module>../sample/framework</module>
+		<module>../sample/framework-events</module>
 	</modules>
 	
 	<dependencies>

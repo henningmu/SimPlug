@@ -9,7 +9,7 @@
 	</parent>
 	
 	<groupId>org.simplug.framework.sample</groupId>
-	<artifactId>sample-framework</artifactId>
+	<artifactId>framework</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SimPlug Plugin Framework Sample Framework</name>
 </project>
