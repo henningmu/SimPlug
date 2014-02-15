@@ -7,6 +7,8 @@ import org.simplug.framework.model.events.InterruptEvent;
 
 public class Plugin {
 
+	protected SimPlugContext context;
+	
 	public final void receiveAndDelegateEvent(Event event) {
 		if (event instanceof InitEvent) {
 			onInit(event);
@@ -18,8 +20,11 @@ public class Plugin {
 			onEventReceived(event);
 		}
 	}
-
+	
 	public void onInit(Event event) {
+		InitEvent initEvent = (InitEvent) event;
+		
+		this.context = initEvent.getContext();
 	}
 
 	public void onEventReceived(Event event) {
