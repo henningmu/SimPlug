@@ -21,6 +21,10 @@ public class Plugin {
 		}
 	}
 	
+	public final void fireEvent(Event event) {
+		this.context.fireEvent(event);
+	}
+	
 	public void onInit(Event event) {
 		InitEvent initEvent = (InitEvent) event;
 		
