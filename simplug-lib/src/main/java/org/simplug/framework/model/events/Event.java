@@ -20,4 +20,9 @@ public abstract class Event {
 	public void setEventReceiver(Class<?> eventReceiver) {
 		this.eventReceiver = eventReceiver;
 	}
+	
+	@Override
+	public String toString() {
+		return descriptor;
+	}
 }
