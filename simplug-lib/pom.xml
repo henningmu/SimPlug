@@ -9,6 +9,6 @@
 		<relativePath>../simplug-parent</relativePath>
 	</parent>
 
-	<artifactId>simplug-model</artifactId>
+	<artifactId>simplug-lib</artifactId>
 	<name>SimPlug Plugin Framework Model</name>
 </project>

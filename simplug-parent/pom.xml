@@ -10,11 +10,11 @@
 
 	<modules>
 		<module>../simplug-core</module>
-		<module>../simplug-model</module>
+		<module>../simplug-lib</module>
 		<module>../sample/plugin-alpha</module>
 		<module>../sample/plugin-beta</module>
 		<module>../sample/framework</module>
-		<module>../sample/framework-events</module>
+		<module>../sample/framework-lib</module>
 	</modules>
 	
 	<dependencies>

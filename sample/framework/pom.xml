@@ -21,7 +21,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.simplug.framework.sample</groupId>
-			<artifactId>framework-events</artifactId>
+			<artifactId>framework-lib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>

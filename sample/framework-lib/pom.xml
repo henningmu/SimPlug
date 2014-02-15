@@ -9,13 +9,13 @@
 	</parent>
 
 	<groupId>org.simplug.framework.sample</groupId>
-	<artifactId>framework-events</artifactId>
+	<artifactId>framework-lib</artifactId>
 	<name>SimPlug Plugin Framework Sample Framework Events</name>
 	
 	<dependencies>
 		<dependency>
 			<groupId>org.simplug.framework</groupId>
-			<artifactId>simplug-model</artifactId>
+			<artifactId>simplug-lib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>

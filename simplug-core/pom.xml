@@ -15,7 +15,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.simplug.framework</groupId>
-			<artifactId>simplug-model</artifactId>
+			<artifactId>simplug-lib</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
