@@ -66,11 +66,11 @@ public class PluginManager {
 	public void logPlugins() {
 		LOG.info("== All known Event Listeners / Plugins:");
 		for (String event : eventListeners.keySet()) {
-			LOG.info("Listeners for event: " + event);
+			LOG.info("Listeners for event: {}", event);
 			List<Class<?>> listeners = eventListeners.get(event);
 			int i = 1;
 			for (Class<?> listener : listeners) {
-				LOG.info("" + i + ". " + listener.getName());
+				LOG.info("{}. {}", i, listener.getName());
 				i++;
 			}
 		}

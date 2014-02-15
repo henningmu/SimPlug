@@ -74,11 +74,11 @@ public class ConfigBasedPluginLoader implements PluginLoader {
 			fileStreamJar.close();
 		} catch (FileNotFoundException e) {
 			LOG.warn("FileNotFoundException while trying to open a JarInputStream. "
-					+ "Responsible file: " + pluginJar.getName());
+					+ "Responsible file: {}", pluginJar.getName());
 			return null;
 		} catch (IOException e) {
 			LOG.warn("IOException while trying to open a JarInputStream. "
-					+ " Responsible file: " + pluginJar.getName());
+					+ " Responsible file: {}", pluginJar.getName());
 			return null;
 		}
 
@@ -95,14 +95,15 @@ public class ConfigBasedPluginLoader implements PluginLoader {
 			Class<?> listeningClass = null;
 			String className = pluginConfiguration.getProperty(keyEvent);
 			if (isPluginClass(className, classLoader) == false) {
-				LOG.info("Class " + className + " is not a valid plugin. It is registered to listen for event "
-						+ keyEvent + " but does not extend the Plugin class provided in simplug-model.");
+				LOG.info("Class {} is not a valid plugin. It is registered to listen for event {}"
+						+ " but does not extend the Plugin class provided in simplug-model.",
+						new Object[]{ className, keyEvent });
 			}
 			try {
 				listeningClass = classLoader.loadClass(className);
 			} catch (ClassNotFoundException e) {
-				LOG.warn("ClassNotFoundException while reading plugin configuration. Tried to create class: "
-						+ pluginConfiguration.getProperty(keyEvent) + " to listen for event: " + keyEvent);
+				LOG.warn("ClassNotFoundException while reading plugin configuration. Tried to create class: {}"
+						+ " to listen for event: {}", new Object[]{ pluginConfiguration.getProperty(keyEvent), keyEvent });
 			}
 
 			if (currentListeners == null) {
@@ -123,7 +124,7 @@ public class ConfigBasedPluginLoader implements PluginLoader {
 			 }
 		 } catch (ClassNotFoundException e) {
 			 LOG.warn("ClassNotFoundException while trying to determine whether class is a plugin or not. "
-					 + "Faulty class name: " + className);
+					 + "Faulty class name: {}", className);
 			 return false;
 		 }
 		 return false;

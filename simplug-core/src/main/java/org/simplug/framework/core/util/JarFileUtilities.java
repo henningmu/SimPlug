@@ -18,7 +18,7 @@ public class JarFileUtilities {
 			directory = new File(pathname);
 		} catch (NullPointerException npe) {
 			LOG.warn("NullPointerException while trying to acquire all Jar files from directory. "
-					+ "Probably the pathname is invalid. Passed pathname: " + pathname);
+					+ "Probably the pathname is invalid. Passed pathname: {}", pathname);
 			return null;
 		}
 
@@ -33,7 +33,7 @@ public class JarFileUtilities {
 				urls[i] = files[i].toURI().toURL();
 			} catch (MalformedURLException e) {
 				LOG.warn("MalformedURLException: Could not transform file to URL. " 
-						+ "Responsible file: " + files[i].getName());
+						+ "Responsible file: {}", files[i].getName());
 				return null;
 			}
 		}

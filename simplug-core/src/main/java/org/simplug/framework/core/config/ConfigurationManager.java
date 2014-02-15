@@ -35,8 +35,8 @@ public class ConfigurationManager implements Configuration{
 		try {
 			properties = new PropertiesConfiguration(CONFIGURATION);
 		} catch (ConfigurationException e) {
-			LOG.warn("ConfigurationException while trying to load config: " + CONFIGURATION + ". "
-					+ "Message: " + e.getMessage());
+			LOG.warn("ConfigurationException while trying to load config: {}. "
+					+ "Message: {}", new Object[]{ CONFIGURATION, e.getMessage()});
 		}
 	}
 }

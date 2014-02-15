@@ -9,7 +9,7 @@ import org.simplug.framework.sample.events.GammaEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@ListenTo(GammaEvent.class)
+@ListenTo({GammaEvent.class, BetaEvent.class})
 public class CorePluginClass extends Plugin {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(CorePluginClass.class);

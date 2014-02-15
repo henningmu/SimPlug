@@ -27,11 +27,5 @@ public class Main {
 		}
 		
 		simPlug.shutdown();
-		
-//		simPlug.fireEvent(AlphaEvent.class.getName(), null);
-//		simPlug.fireEvent(BetaEvent.class.getName(), null);
-//		simPlug.fireEvent(GammaEvent.class.getName(), null);
-//		simPlug.fireEvent(AlphaEvent.class.getName(), null);
-//		simPlug.fireEvent(BetaEvent.class.getName(), null);
 	}
 }
