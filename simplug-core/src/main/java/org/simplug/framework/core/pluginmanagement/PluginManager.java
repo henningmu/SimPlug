@@ -1,14 +1,15 @@
-package org.simplug.framework.core;
+package org.simplug.framework.core.pluginmanagement;
 
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.simplug.framework.core.config.Configuration;
 import org.simplug.framework.core.config.ConfigurationManager;
 import org.simplug.framework.core.util.ClassLoaderUtilities;
 import org.simplug.framework.core.util.JarUtilities;
-import org.simplug.framework.model.Plugin;
+import org.simplug.framework.model.events.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +19,11 @@ public class PluginManager {
 			.getLogger(PluginManager.class);
 
 	private LinkedHashMap<String, List<Class<?>>> eventListeners;
+	private LinkedBlockingQueue<Event> eventQueue;
+	private EventQueueManager eventQueueManager;
 
 	public PluginManager() {
-
+		eventQueue = new LinkedBlockingQueue<Event>();
 	}
 
 	public void loadAndClassifyPlugins() {
@@ -34,20 +37,35 @@ public class PluginManager {
 		eventListeners = ClassLoaderUtilities.getEventListeners(jarFiles);
 	}
 
-	public void delegateEvent(String event, Object data) {
-		List<Class<?>> listeningClasses = eventListeners.get(event);
-		for (Class<?> clazz : listeningClasses) {
-			try {
-				Plugin pluginImpl = (Plugin) clazz.newInstance();
-				pluginImpl.start();
-			} catch (InstantiationException e) {
-				LOG.warn(e.getMessage());
-			} catch (IllegalAccessException e) {
-				LOG.warn(e.getMessage());
-			}
+	public void manageEvent(Event event) {
+		try {
+			eventQueue.put(event);
+		} catch (InterruptedException e) {
+			LOG.warn("InterruptedException while trying to put Event in queue: {}",
+					e.getMessage());
+		}
+
+		if (eventQueueManager == null) {
+			eventQueueManager = new EventQueueManager(eventQueue,
+					eventListeners);
+		}
+		if (!eventQueueManager.isRunning()) {
+			new Thread(eventQueueManager).start();
 		}
 	}
+	
+	public void shutdown() {
+		eventQueueManager.stop();
+	}
+	
+	public boolean isSafeShutdown() {
+		if(eventQueue.size() == 0) {
+			return true;
+		}
+		return false;
+	}
 
+	@Deprecated
 	public void logPlugins() {
 		LOG.info("== All known Event Listeners / Plugins:");
 		for (String event : eventListeners.keySet()) {

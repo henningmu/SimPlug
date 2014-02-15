@@ -1,8 +1,11 @@
 package org.simplug.framework.core;
 
 import org.simplug.framework.core.config.ConfigurationManager;
+import org.simplug.framework.core.pluginmanagement.PluginManager;
+import org.simplug.framework.model.SimPlugContext;
+import org.simplug.framework.model.events.Event;
 
-public class SimPlug {
+public class SimPlug implements SimPlugContext {
 	
 	private static SimPlug instance;
 	private static ConfigurationManager configManager;
@@ -25,11 +28,19 @@ public class SimPlug {
 		classifyPlugins();
 	}
 	
-	public void fireEvent(String event, Object data) {
-		pluginManager.delegateEvent(event, data);
+	public void fireEvent(Event event) {
+		pluginManager.manageEvent(event);
 	}
 	
-	// only for testing
+	public void shutdown() {
+		pluginManager.shutdown();
+	}
+	
+	public boolean isSafeShutdown() {
+		return pluginManager.isSafeShutdown();
+	}
+	
+	@Deprecated
 	public void logLoadedPlugins() {
 		pluginManager.logPlugins();
 	}
