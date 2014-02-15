@@ -31,8 +31,15 @@ public class EventManager implements Runnable {
 	public void run() {
 		for (Class<?> clazz : eventListeners) {
 			try {
-				Plugin plugin = (Plugin) clazz.newInstance();
-
+				Plugin plugin = null;
+				if(event.getEventReceiver() != null) {
+					plugin = (Plugin) event.getEventReceiver().newInstance();
+				}
+				else {
+					plugin = (Plugin) clazz.newInstance();
+				}
+				
+				// TODO: Determine if plugin is already started ...
 				InitEvent initEvent = new InitEvent(SimPlug.getInstance());
 
 				plugin.receiveAndDelegateEvent(initEvent);

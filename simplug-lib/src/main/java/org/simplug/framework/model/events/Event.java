@@ -5,7 +5,6 @@ package org.simplug.framework.model.events;
  * this class serializable / parceable
  * */
 public abstract class Event {
-	@SuppressWarnings("unused")
 	private Class<?> eventReceiver;
 	private String descriptor;
 
@@ -19,6 +18,10 @@ public abstract class Event {
 
 	public void setEventReceiver(Class<?> eventReceiver) {
 		this.eventReceiver = eventReceiver;
+	}
+	
+	public Class<?> getEventReceiver() {
+		return eventReceiver;
 	}
 	
 	@Override
