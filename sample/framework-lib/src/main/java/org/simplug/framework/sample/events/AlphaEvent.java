@@ -1,7 +1,8 @@
 package org.simplug.framework.sample.events;
 
-import org.simplug.framework.model.events.Event;
+public class AlphaEvent extends FrameworkEvent {
 
-public class AlphaEvent extends Event {
-
+	public AlphaEvent(String dataString) {
+		super(dataString);
+	}
 }
