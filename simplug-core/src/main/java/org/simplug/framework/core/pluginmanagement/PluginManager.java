@@ -6,7 +6,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.simplug.framework.core.config.Configuration;
 import org.simplug.framework.core.config.ConfigurationManager;
-import org.simplug.framework.core.util.ConfigPluginLoader;
+import org.simplug.framework.core.util.AnnotationBasedPluginLoader;
 import org.simplug.framework.model.events.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,11 +28,10 @@ public class PluginManager {
 		ConfigurationManager configurationManager = ConfigurationManager
 				.getInstance();
 		String pluginPath = configurationManager.getProperty(Configuration.CONF_PLUGIN_DIRECTORY);
-		String configName = configurationManager.getProperty(Configuration.CONF_PLUGIN_CONFIG_NAME);
 		
-		ConfigPluginLoader configLoader = new ConfigPluginLoader(pluginPath, configName);
-
-		eventListeners = configLoader.getAllRegisteredEventListeners();
+		AnnotationBasedPluginLoader pluginLoader = new AnnotationBasedPluginLoader(pluginPath); 
+		
+		eventListeners = pluginLoader.getAllRegisteredEventListeners();
 	}
 
 	public void manageEvent(Event event) {

@@ -18,15 +18,15 @@ import org.simplug.framework.model.Plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ConfigPluginLoader implements PluginLoader {
+public class ConfigBasedPluginLoader implements PluginLoader {
 
 	private static final Logger LOG = LoggerFactory
-			.getLogger(ConfigPluginLoader.class);
+			.getLogger(ConfigBasedPluginLoader.class);
 
 	private String pluginPath;
 	private String configName;
 
-	public ConfigPluginLoader(String pluginPath, String configName) {
+	public ConfigBasedPluginLoader(String pluginPath, String configName) {
 		this.pluginPath = pluginPath;
 		this.configName = configName;
 	}

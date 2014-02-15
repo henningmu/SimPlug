@@ -1,6 +1,7 @@
 package org.simplug.framework.sample.alpha;
 
 import org.simplug.framework.model.Plugin;
+import org.simplug.framework.model.annotations.ListenTo;
 import org.simplug.framework.model.events.Event;
 import org.simplug.framework.sample.events.AlphaEvent;
 import org.simplug.framework.sample.events.BetaEvent;
@@ -8,6 +9,7 @@ import org.simplug.framework.sample.events.GammaEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@ListenTo( {AlphaEvent.class, GammaEvent.class} )
 public class CorePluginClass extends Plugin {
 
 	private static final Logger LOG = LoggerFactory
