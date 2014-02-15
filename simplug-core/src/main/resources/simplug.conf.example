@@ -16,3 +16,11 @@ org.simplug.framework.core.plugindir = "plugins/"
 # change their configuration file name otherwise SimPlug
 # will not load all of your plugins
 org.simplug.framework.core.pluginconf.name = "plugin.conf"
+
+# Decides how the Plugins are analyzed and their lifecycle-
+# implementing methods should be found.
+# Possible values are: "configurations" and "annotations"
+# Only one method will be executed. If you implement both
+# methods (annotations and a config file) in your plugin
+# this config-property decides what to do.
+org.simplug.framework.core.pluginloading = annotations
