@@ -7,10 +7,10 @@ import java.net.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JarUtilities {
+public class JarFileUtilities {
 
 	private static final Logger LOG = LoggerFactory
-			.getLogger(JarUtilities.class);
+			.getLogger(JarFileUtilities.class);
 
 	public static File[] getAllJarFilesFromPath(String pathname) {
 		File directory;

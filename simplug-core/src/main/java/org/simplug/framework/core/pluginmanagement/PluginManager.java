@@ -1,14 +1,12 @@
 package org.simplug.framework.core.pluginmanagement;
 
-import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.simplug.framework.core.config.Configuration;
 import org.simplug.framework.core.config.ConfigurationManager;
-import org.simplug.framework.core.util.ClassLoaderUtilities;
-import org.simplug.framework.core.util.JarUtilities;
+import org.simplug.framework.core.util.ConfigPluginLoader;
 import org.simplug.framework.model.events.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,12 +27,12 @@ public class PluginManager {
 	public void loadAndClassifyPlugins() {
 		ConfigurationManager configurationManager = ConfigurationManager
 				.getInstance();
+		String pluginPath = configurationManager.getProperty(Configuration.CONF_PLUGIN_DIRECTORY);
+		String configName = configurationManager.getProperty(Configuration.CONF_PLUGIN_CONFIG_NAME);
+		
+		ConfigPluginLoader configLoader = new ConfigPluginLoader(pluginPath, configName);
 
-		File[] jarFiles = JarUtilities
-				.getAllJarFilesFromPath(configurationManager
-						.getProperty(Configuration.CONF_PLUGIN_DIRECTORY));
-
-		eventListeners = ClassLoaderUtilities.getEventListeners(jarFiles);
+		eventListeners = configLoader.getAllRegisteredEventListeners();
 	}
 
 	public void manageEvent(Event event) {
