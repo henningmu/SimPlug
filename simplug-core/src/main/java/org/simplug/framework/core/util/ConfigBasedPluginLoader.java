@@ -18,6 +18,11 @@ import org.simplug.framework.model.Plugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Implementation of the @see PluginLoader interface.
+ * This class is representing a plugin loader using a provided configuration
+ * inside every plugin to register all classes to the events.
+ * */
 public class ConfigBasedPluginLoader implements PluginLoader {
 
 	private static final Logger LOG = LoggerFactory
@@ -26,11 +31,29 @@ public class ConfigBasedPluginLoader implements PluginLoader {
 	private String pluginPath;
 	private String configName;
 
+	/**
+	 * Constructs a configuration based plugin loader. It scans for all plugins in the
+	 * given pluginPath and extracts the plugin configuration specified by the configName
+	 * parameter.
+	 * 
+	 * @param pluginPath
+	 * 		the directory in which the plugins are stored
+	 * @param configName
+	 * 		the name of the configuration file inside every plugin
+	 * */
 	public ConfigBasedPluginLoader(String pluginPath, String configName) {
 		this.pluginPath = pluginPath;
 		this.configName = configName;
 	}
 
+	/**
+	 * This method returns all registered event listeners extracted from all plugins.
+	 * It loads the configurations of every plugin, accesses the key value pairs representing the
+	 * event - listener relationship and stores the information in a structure which is then returned.
+	 * 
+	 * @return
+	 * 		the structure holding all events as key and a list of listening classes as corresponding value
+	 * */	
 	public LinkedHashMap<String, List<Class<?>>> getAllRegisteredEventListeners() {
 		LinkedHashMap<String, List<Class<?>>> registeredEventListeners = new LinkedHashMap<String, List<Class<?>>>();
 

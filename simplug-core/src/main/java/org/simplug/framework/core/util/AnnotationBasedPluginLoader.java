@@ -16,6 +16,12 @@ import org.simplug.framework.model.events.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Implementation of the @see PluginLoader interface.
+ * This class represents a plugin loader using annotations to load all
+ * classes listening to events from a specified directory. It loads all classes
+ * annotated with the @see ListenTo annotation
+ * */
 public class AnnotationBasedPluginLoader implements PluginLoader {
 
 	private static final Logger LOG = LoggerFactory
@@ -24,11 +30,26 @@ public class AnnotationBasedPluginLoader implements PluginLoader {
 	private String pluginPath;
 	private LinkedHashMap<String, List<Class<?>>> registeredEventListeners;
 
+	/**
+	 * Constructs an annotation based plugin loader. It scans the given path for all
+	 * plugins and scans every class for the @see ListenTo annotation.
+	 * 
+	 * @param pluginPath
+	 * 		the directory in which the plugins are stored
+	 * */	
 	public AnnotationBasedPluginLoader(String pluginPath) {
 		this.pluginPath = pluginPath;
 		registeredEventListeners = new LinkedHashMap<String, List<Class<?>>>();
 	}
 
+	/**
+	 * This method returns all registered event listeners extracted from all plugins.
+	 * It loads all plugins from the specified path and scans every class for the @see
+	 * ListenTo annotation. Every class is then stored in the structure which is returned later.
+	 * 
+	 * @return
+	 * 		the structure holding all events as key and a list of listening classes as corresponding value
+	 * */
 	public LinkedHashMap<String, List<Class<?>>> getAllRegisteredEventListeners() {
 		File[] pluginJarFiles = JarFileUtilities
 				.getAllJarFilesFromPath(pluginPath);
@@ -54,7 +75,7 @@ public class AnnotationBasedPluginLoader implements PluginLoader {
 						.endsWith(".class");
 				if (isClass) {
 					// stripe the .class extension and replace / by . to get
-					// package
+					// the actual package description
 					String actualClassName = entry.getName()
 							.substring(0, entry.getName().length() - 6)
 							.replace("/", ".");

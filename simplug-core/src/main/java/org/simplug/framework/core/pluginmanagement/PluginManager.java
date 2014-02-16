@@ -22,11 +22,21 @@ public class PluginManager {
 	private LinkedBlockingQueue<Event> eventQueue;
 	private EventQueueManager eventQueueManager;
 
+	/**
+	 * Simple constructor initializing all needed members.
+	 * It does NOT load or start any plugins.
+	 * */
 	public PluginManager() {
 		eventQueue = new LinkedBlockingQueue<Event>();
 	}
 
-	public void loadAndClassifyPlugins() {
+	/**
+	 * This method is responsible for loading all plugins and registering them for later access.
+	 * It reads the SimPlug configuration and uses a @see PluginLoader to load all the plugins and
+	 * save them in a specific structure.
+	 * This method only loads and registers the plugins. It neither initializes them nor starts them in any way.
+	 * */
+	public void loadAndRegisterPlugins() {
 		ConfigurationManager configurationManager = ConfigurationManager
 				.getInstance();
 		String pluginPath = configurationManager.getProperty(Configuration.CONF_PLUGIN_DIRECTORY);
@@ -35,17 +45,23 @@ public class PluginManager {
 		
 		PluginLoader pluginLoader = null;
 		if(Configuration.PLUGIN_LOADING_CONFIG_BASED.equals(loadingMethod)) {
-			LOG.info("config based");
 			pluginLoader = new ConfigBasedPluginLoader(pluginPath, configName);
 		}
 		else {
-			LOG.info("annotation based");
 			pluginLoader = new AnnotationBasedPluginLoader(pluginPath);
 		}
 		
 		eventListeners = pluginLoader.getAllRegisteredEventListeners();
 	}
 
+	/**
+	 * Whenever an event is fired it has to be managed. Therefore the plugin manager manages an event queue. 
+	 * This thread safe structure is filled with every event and the @see EventQueueManager is responsible
+	 * for executing the events. When not @see EventQueueManager is instantiated the plugin manager instantiates one.
+	 * 
+	 * @param event
+	 * 		the event which was fired and now has to be managed
+	 * */
 	public void manageEvent(Event event) {
 		try {
 			eventQueue.put(event);
@@ -63,10 +79,21 @@ public class PluginManager {
 		}
 	}
 	
+	/**
+	 * This method shuts down the @see EventQueueManager. By doing so all pending events get
+	 * discared. Only use this method if that is the wanted behaviour or if the shutdown is safe
+	 * (check using @see SimPlug.isSafeShutdown).
+	 * */
 	public void shutdown() {
 		eventQueueManager.stop();
 	}
 	
+	/**
+	 * When there are no events in the queue left it is safe to shutdown. Otherwise it is not.
+	 * 
+	 * @return
+	 * 		true if it is safe to shut down or false otherwise
+	 * */
 	public boolean isSafeShutdown() {
 		if(eventQueue.size() == 0) {
 			return true;
@@ -74,6 +101,9 @@ public class PluginManager {
 		return false;
 	}
 
+	/**
+	 * @see SimPlug.logLoadedPlugins()
+	 * */
 	@Deprecated
 	public void logPlugins() {
 		LOG.info("== All known Event Listeners / Plugins:");
