@@ -10,11 +10,11 @@ import org.simplug.framework.model.events.Event;
  * */
 public interface SimPlugContext {
 	/**
-	 * This method takes an event and fires it to all registered listeners. It
-	 * does not return anything. If you expect an answer from an event create an
+	 * This method takes an event and fires it to all registered listeners. <br />
+	 * It does not return anything. If you expect an answer from an event create an
 	 * response event and register for it.
 	 * 
-	 * @parm event The event to be fired
+	 * @param event The event to be fired
 	 * */
 	public void fireEvent(Event event);
 }
