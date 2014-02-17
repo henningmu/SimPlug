@@ -26,6 +26,8 @@ public class Main {
 			Thread.sleep(10);
 		}
 		
+		LOG.info("Before shutdown");
 		simPlug.shutdown();
+		LOG.info("After shutdown");
 	}
 }

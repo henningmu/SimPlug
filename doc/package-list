@@ -1,0 +1,7 @@
+org.simplug.framework.core
+org.simplug.framework.core.config
+org.simplug.framework.core.pluginmanagement
+org.simplug.framework.core.util
+org.simplug.framework.model
+org.simplug.framework.model.annotations
+org.simplug.framework.model.events
