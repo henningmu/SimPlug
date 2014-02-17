@@ -17,10 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Implementation of the @see PluginLoader interface.
+ * Implementation of the {@link PluginLoader} interface.
  * This class represents a plugin loader using annotations to load all
  * classes listening to events from a specified directory. It loads all classes
- * annotated with the @see ListenTo annotation
+ * annotated with the {@link org.simplug.framework.model.annotations.ListenTo} annotation.
  * */
 public class AnnotationBasedPluginLoader implements PluginLoader {
 
@@ -32,10 +32,10 @@ public class AnnotationBasedPluginLoader implements PluginLoader {
 
 	/**
 	 * Constructs an annotation based plugin loader. It scans the given path for all
-	 * plugins and scans every class for the @see ListenTo annotation.
+	 * plugins and scans every class for the {@link org.simplug.framework.model.annotations.ListenTo} annotation.
 	 * 
 	 * @param pluginPath
-	 * 		the directory in which the plugins are stored
+	 * 		the directory in which the plugins are stored.
 	 * */	
 	public AnnotationBasedPluginLoader(String pluginPath) {
 		this.pluginPath = pluginPath;
@@ -44,11 +44,12 @@ public class AnnotationBasedPluginLoader implements PluginLoader {
 
 	/**
 	 * This method returns all registered event listeners extracted from all plugins.
-	 * It loads all plugins from the specified path and scans every class for the @see
-	 * ListenTo annotation. Every class is then stored in the structure which is returned later.
+	 * It loads all plugins from the specified path and scans every class for the
+	 * {@link org.simplug.framework.model.annotations.ListenTo} annotation.
+	 * Every class is then stored in the structure which is returned later.
 	 * 
 	 * @return
-	 * 		the structure holding all events as key and a list of listening classes as corresponding value
+	 * 		the structure holding all events as key and a list of listening classes as corresponding value.
 	 * */
 	public LinkedHashMap<String, List<Class<?>>> getAllRegisteredEventListeners() {
 		File[] pluginJarFiles = JarFileUtilities

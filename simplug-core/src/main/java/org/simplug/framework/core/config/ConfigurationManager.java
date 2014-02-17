@@ -6,9 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This class is implementing the configuration interface
+ * This class is implementing the {@link Configuration} interface
  * and makes it possible to access the configuration of the SimPlug Framework.
- * It is defined as a singleton. So there shouldnt be any hussle of various 
+ * It is defined as a singleton. So there should not be any problems of various 
  * threads accessing the configuration at the same time.
  * */
 public class ConfigurationManager implements Configuration{	
@@ -23,12 +23,12 @@ public class ConfigurationManager implements Configuration{
 	}
 	
 	/**
-	 * Since the ConfigurationManager is defined as singleton one is not able to 
+	 * The ConfigurationManager is defined as singleton. One is not able to 
 	 * call the constructor directly but may access an instance of the manager with this method.
 	 * Every call of this method returns the same instance.
 	 * 
 	 * @return
-	 * 		the instance of the ConfigurationManager
+	 * 		the instance of the ConfigurationManager.
 	 * */
 	public static ConfigurationManager getInstance() {
 		if(instance == null) {
@@ -39,7 +39,12 @@ public class ConfigurationManager implements Configuration{
 	}
 
 	/**
-	 * @see Configuration.getProperty(String key)
+	 * This method reads the configuration and returns the property value for the given key.
+	 * 
+	 * @param key
+	 * 		the property key to access.
+	 * @return
+	 * 		the property value specified by the key.
 	 * */
 	public String getProperty(String key) {
 		if(properties != null) {
@@ -49,7 +54,8 @@ public class ConfigurationManager implements Configuration{
 	}
 
 	/**
-	 * @see Configuration.loadConfig()
+	 * This methods loads the configuration file and should store it
+	 * for later access of properties.
 	 * */
 	public void loadConfig() {
 		try {

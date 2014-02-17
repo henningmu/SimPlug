@@ -17,13 +17,13 @@ public class JarFileUtilities {
 
 	/**
 	 * This method extracts all jar files (files ending on ".jar") inside
-	 * the given directory. If any errors occurs the method logs the error and returns null.
+	 * the given directory. If any errors occurs the method logs the error and returns <code>null</code>.
 	 * 
 	 * @param pathname
-	 * 		the directory to scan for jar files
+	 * 		the directory to scan for jar files.
 	 * 
 	 * @return
-	 * 		array with all jar files in the given directory or null if an error occurred
+	 * 		array with all jar files in the given directory or <code>null</code> if an error occurred.
 	 * */
 	public static File[] getAllJarFilesFromPath(String pathname) {
 		File directory;
@@ -46,14 +46,14 @@ public class JarFileUtilities {
 	/**
 	 * This method takes an array of files and converts it into an
 	 * array of Urls. This is can be used to instantiate an
-	 * @see URLClassLoader for examople. If any error occurrs this method
-	 * logs the error and returns null instead of an array.
+	 * {@link java.net.URLClassLoader} for example. If any error occurs this method
+	 * logs the error and returns <code>null</code> instead of an array.
 	 * 
 	 * @param files
-	 * 		the files to convert to Urls
+	 * 		the files to convert to Urls.
 	 * 
 	 * @return
-	 *  	array with all Urls belonging to the given files or null if an error occured
+	 *  	array with all Urls belonging to the given files or <code>null</code> if an error occured.
 	 * */
 	public static URL[] convertFilesToUrls(File[] files) {
 		URL[] urls = new URL[files.length];

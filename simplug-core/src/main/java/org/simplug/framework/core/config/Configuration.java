@@ -20,9 +20,9 @@ public interface Configuration {
 	 * This method reads the configuration and returns the property value for the given key.
 	 * 
 	 * @param key
-	 * 		the property key to access
+	 * 		the property key to access.
 	 * @return
-	 * 		the property value specified by the key
+	 * 		the property value specified by the key.
 	 * */
 	public String getProperty(String key);
 	

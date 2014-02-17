@@ -7,10 +7,10 @@ import org.simplug.framework.model.events.Event;
 
 
 /**
- * This the core class of the SimPlug Framework. It provides all the necessary
- * communication with other implementing frameworks. When you are using the SimPlug
- * Framework you only have to communicate with this class. Use this class as the
- * context to bind to your plugins.
+ * This the core class of the SimPlug Framework.<br />
+ * It provides all the necessary communication with other implementing frameworks.
+ * When you are using the SimPlug Framework you only have to communicate with this class.
+ * Use this class as the context to bind to your plugins to.
  * */
 public class SimPlug implements SimPlugContext {
 	
@@ -22,11 +22,12 @@ public class SimPlug implements SimPlugContext {
 	}
 	
 	/**
-	 * The core class is defined is defined as singleton. So the constructor is hidden
+	 * This core class is defined is defined as singleton. So the constructor is hidden
 	 * from the outside allowing the acquisition of an instance only by calling this 
-	 * method. Every call of this method is going to return the same instance.
+	 * method. Every call of this method is returning the same instance.
 	 * 
-	 * @return the instance of the SimPlug Framework core class
+	 * @return
+	 * 		the instance of the SimPlug Framework core class.
 	 * */
 	public static SimPlug getInstance() {
 		if(instance == null) {
@@ -38,8 +39,8 @@ public class SimPlug implements SimPlugContext {
 	
 	/**
 	 * Call this method to trigger the loading of plugins. It loads the SimPlug configuration
-	 * to know where the plugins are installed to. After calling this method you can send events
-	 * to your plugins.
+	 * to know where the plugins are installed to. Only after calling this method you can
+	 * send events to your plugins.
 	 * */
 	public void loadPlugins() {
 		loadConfig();
@@ -48,29 +49,34 @@ public class SimPlug implements SimPlugContext {
 	
 	
 	/**
-	 * Implementation of @see SimPlugContext.fireEvent(Event event).
+	 * Implementation of {@link org.simplug.framework.model.SimPlugContext#fireEvent(Event)}.
 	 * It takes the event and passes it to the PluginManager to handle it accordingly.
 	 * 
 	 * @param event
-	 * 		the event to fire
+	 * 		the event to fire.
 	 * */
 	public void fireEvent(Event event) {
 		pluginManager.manageEvent(event);
 	}
 	
 	/**
-	 * Shuts down all threads and running tasks of the SimPlug Framework.
-	 * Use SimPlug.isSafeShutdown to check whether it is safe to shutdown the
-	 * framework without discarding events. Maybe you want to fire DestroyEvents
-	 * in before to tell all plugins to shutdown.
+	 * Shuts down all threads and running tasks of the SimPlug Framework.<br />
+	 * Use {@link #isSafeShutdown()} to check whether it is safe to shutdown the
+	 * framework without discarding events. Maybe you want to fire
+	 * {@link org.simplug.framework.model.events.DestroyEvent} to your plugins
+	 * to tell them to shutdown.
 	 * */
 	public void shutdown() {
 		pluginManager.shutdown();
 	}
 	
 	/**
-	 * @return true if it is safe to shutdown the framework (no pending tasks left)
-	 * 		otherwise returns false
+	 * Returns whether it is safe call {@link #shutdown()} or not.<br />
+	 * Returns <code>true</code> when there are no pending events left (the plugins may still
+	 * be working on some tasks though) or <code>false</code> if there are still pending events.
+	 * 
+	 * @return
+	 * 		<code>true</code> if there are no pending events, otherwise returns <code>false</code>.
 	 * */
 	public boolean isSafeShutdown() {
 		return pluginManager.isSafeShutdown();

@@ -8,12 +8,13 @@ import java.util.List;
  * */
 public interface PluginLoader {
 	/**
+	 * This method returns a mapping for all registered listeners on an event.<br />
 	 * Any implementation of this interface has to be able to get all registered event listeners
 	 * and save them inside a LinkedHashMap with the event descriptor as key and a list of all
-	 * classes which are listening to that event.
+	 * classes which are listening to that event as value.
 	 * 
-	 * @return a structure representing all registered event listeners. The key of this structure
-	 * 		are the events the values are all listening classes to that event.
+	 * @return a structure representing all registered event listeners. The keys of this structure
+	 * 		are the event descriptors and the values are all listening classes to that event.
 	 * */
 	public LinkedHashMap<String, List<Class<?>>> getAllRegisteredEventListeners();
 }

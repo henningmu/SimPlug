@@ -13,6 +13,11 @@ import org.simplug.framework.model.events.Event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This class is responsible for managing all plugins deployed with the SimPlug Framework.<br />
+ * It manages all incoming events and delegates them to the receiving plugins.
+ * It functions as kind of "uber-manager" for all the other managers like {@link EventQueueManager} or similar.
+ * */
 public class PluginManager {
 
 	private static final Logger LOG = LoggerFactory
@@ -32,8 +37,8 @@ public class PluginManager {
 
 	/**
 	 * This method is responsible for loading all plugins and registering them for later access.
-	 * It reads the SimPlug configuration and uses a @see PluginLoader to load all the plugins and
-	 * save them in a specific structure.
+	 * It reads the SimPlug configuration and uses a {@link org.simplug.framework.core.util.PluginLoader} to load all the plugins and
+	 * save them in a specific structure.<br />
 	 * This method only loads and registers the plugins. It neither initializes them nor starts them in any way.
 	 * */
 	public void loadAndRegisterPlugins() {
@@ -55,12 +60,13 @@ public class PluginManager {
 	}
 
 	/**
-	 * Whenever an event is fired it has to be managed. Therefore the plugin manager manages an event queue. 
-	 * This thread safe structure is filled with every event and the @see EventQueueManager is responsible
-	 * for executing the events. When not @see EventQueueManager is instantiated the plugin manager instantiates one.
+	 * Whenever an event is fired it has to be managed by this method.
+	 * Therefore the plugin manager manages an event queue. This thread safe structure is filled with every event
+	 * and the {@link EventQueueManager} is responsible for executing those events.
+	 * When no {@link EventQueueManager} is instantiated the plugin manager instantiates one.
 	 * 
 	 * @param event
-	 * 		the event which was fired and now has to be managed
+	 * 		the event which was fired and now has to be managed.
 	 * */
 	public void manageEvent(Event event) {
 		try {
@@ -80,9 +86,9 @@ public class PluginManager {
 	}
 	
 	/**
-	 * This method shuts down the @see EventQueueManager. By doing so all pending events get
-	 * discared. Only use this method if that is the wanted behaviour or if the shutdown is safe
-	 * (check using @see SimPlug.isSafeShutdown).
+	 * This method shuts down the {@link EventQueueManager}. By doing so all pending events get
+	 * discarded. Only use this method if that is the wanted behaviour or if the shutdown is safe
+	 * (check using {@link #isSafeShutdown()}).
 	 * */
 	public void shutdown() {
 		eventQueueManager.stop();
@@ -92,7 +98,7 @@ public class PluginManager {
 	 * When there are no events in the queue left it is safe to shutdown. Otherwise it is not.
 	 * 
 	 * @return
-	 * 		true if it is safe to shut down or false otherwise
+	 * 		<code>true</code> if it is safe to shut down or <code>false</code> otherwise.
 	 * */
 	public boolean isSafeShutdown() {
 		if(eventQueue.size() == 0) {
@@ -102,7 +108,7 @@ public class PluginManager {
 	}
 
 	/**
-	 * @see SimPlug.logLoadedPlugins()
+	 * {@link org.simplug.framework.core.SimPlug#logLoadedPlugins()}
 	 * */
 	@Deprecated
 	public void logPlugins() {
